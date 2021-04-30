@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -37,6 +39,14 @@ public class Modalidad {
             columnDefinition = "VARCHAR(15)"
     )
     private String name;
+
+
+    @OneToMany(
+            mappedBy = "modalidad",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Servicio> servicios = new ArrayList<>();
 
 }
 

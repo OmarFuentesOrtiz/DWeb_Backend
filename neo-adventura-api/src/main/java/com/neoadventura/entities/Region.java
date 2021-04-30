@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(
@@ -47,4 +49,11 @@ public class Region {
             )
     )
     private Pais pais;
+
+    @OneToMany(
+            mappedBy = "region",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Servicio> servicios = new ArrayList<>();
 }

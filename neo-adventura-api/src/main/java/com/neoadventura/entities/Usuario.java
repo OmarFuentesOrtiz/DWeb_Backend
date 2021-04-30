@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(
@@ -117,4 +119,11 @@ public class Usuario {
     )
     private Rol rol;
 
+
+    @OneToMany(
+            mappedBy = "usuario",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Servicio> servicios = new ArrayList<>();
 }

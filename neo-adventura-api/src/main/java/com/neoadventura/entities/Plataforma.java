@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(
@@ -40,4 +42,11 @@ public class Plataforma {
             columnDefinition = "VARCHAR(20)"
     )
     private String name;
+
+    @OneToMany(
+            mappedBy = "plataforma",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Servicio> servicios = new ArrayList<>();
 }
