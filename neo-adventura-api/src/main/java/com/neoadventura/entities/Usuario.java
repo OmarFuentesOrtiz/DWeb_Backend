@@ -61,16 +61,16 @@ public class Usuario {
     @Column(
             name="birth_day",
             nullable = false,
-            columnDefinition = "TEXT"
+            columnDefinition = "DATE"
     )
     private Date birth_day;
 
     @Column(
             name="registered",
             nullable = false,
-            columnDefinition = "BOOLEAN"
+            columnDefinition = "DATE"
     )
-    private Boolean registered;
+    private Date registered;
 
     @Column(
             name="suscribed",

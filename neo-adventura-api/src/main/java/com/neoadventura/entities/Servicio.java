@@ -11,11 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(
-        name="servicios",
-        uniqueConstraints = {
-                @UniqueConstraint(name="servicio_name_unique",
-                        columnNames = "name")
-        }
+        name="servicios"
 )
 @Data
 @AllArgsConstructor
