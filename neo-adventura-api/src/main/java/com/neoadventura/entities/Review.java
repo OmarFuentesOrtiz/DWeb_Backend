@@ -17,17 +17,17 @@ import java.util.Set;
 @NoArgsConstructor
 public class Review {
     @EmbeddedId
-    ReviewKey id;
+    private ReviewKey id;
 
     @ManyToOne
     @MapsId("usuarioId")
     @JoinColumn(name="usuario_id")
-    Usuario usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @MapsId("servicioId")
     @JoinColumn(name="servicio_id")
-    Servicio servicio;
+    private Servicio servicio;
 
     @Column(
             name="score",

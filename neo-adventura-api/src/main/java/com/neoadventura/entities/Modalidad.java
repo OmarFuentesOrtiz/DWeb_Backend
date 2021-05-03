@@ -11,7 +11,7 @@ import java.util.Locale;
 
 @Entity
 @Table(
-        name="modalidad"
+        name="modalidades"
 )
 @Data
 @AllArgsConstructor
