@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ModalidadDto {
+public class PlataformaDto {
     private Long id;
     private String name;
-
 }

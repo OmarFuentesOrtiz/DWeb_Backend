@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ModalidadDto {
+public class RegionDto {
     private Long id;
     private String name;
-
+    private String paisId;
 }

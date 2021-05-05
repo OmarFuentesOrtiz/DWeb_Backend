@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,16 +83,16 @@ public class Usuario {
     @Column(
             name="monedero_virtual",
             nullable = false,
-            columnDefinition = "MONEY"
+            columnDefinition = "NUMERIC"
     )
-    private Double monedero_virtual;
+    private BigDecimal monedero_virtual;
 
     @Column(
             name="monedero_oferta",
             nullable = false,
-            columnDefinition = "MONEY"
+            columnDefinition = "NUMERIC"
     )
-    private Double monedero_oferta;
+    private BigDecimal monedero_oferta;
 
     @Column(
             name="same_language",

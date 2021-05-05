@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class Servicio {
     @Column(
             name="name",
             nullable = false,
-            columnDefinition = "VARCHAR(15)"
+            columnDefinition = "VARCHAR(20)"
     )
     private String name;
 
@@ -64,9 +66,9 @@ public class Servicio {
     @Column(
             name="price",
             nullable = false,
-            columnDefinition = "MONEY"
+            columnDefinition = "NUMERIC"
     )
-    private Double price;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(

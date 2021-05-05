@@ -2,6 +2,8 @@ package com.neoadventura.dtos;
 
 import lombok.Getter;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.Date;
 
 @Getter
@@ -10,7 +12,7 @@ public class CreateServiceDto {
     private String description;
     private Date init_valid_date;
     private Date end_valid_date;
-    private Double price;
+    private BigDecimal price;
     private Long modalidad_id;
     private Long region_id;
     private Long plataforma_id;

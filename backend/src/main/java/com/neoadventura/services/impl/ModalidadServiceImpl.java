@@ -28,13 +28,13 @@ public class ModalidadServiceImpl implements ModalidadService {
 
     @Override
     public List<ModalidadDto> getModalidades() throws NeoAdventuraException {
-        List<Modalidad> restaurantsEntity = modalidadRepository.findAll();
-        return restaurantsEntity.stream().map(restaurant -> modelMapper.map(restaurant, ModalidadDto.class))
+        List<Modalidad> modalidadesEntity = modalidadRepository.findAll();
+        return modalidadesEntity.stream().map(restaurant -> modelMapper.map(restaurant, ModalidadDto.class))
                 .collect(Collectors.toList());
     }
 
     private Modalidad getModalidadEntity(Long modalidadId) throws NeoAdventuraException {
         return modalidadRepository.findById(modalidadId)
-                .orElseThrow(() -> new NotFoundException("NOTFOUND-404", "RESTAURANT_NOTFOUND-404"));
+                .orElseThrow(() -> new NotFoundException("NOTFOUND-404", "MODALIDAD_NOTFOUND-404"));
     }
 }
