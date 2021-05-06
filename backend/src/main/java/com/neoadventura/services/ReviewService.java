@@ -9,5 +9,5 @@ import java.util.List;
 public interface ReviewService {
 
     List<ReviewDto> getReviews() throws NeoAdventuraException;
-    ReviewDto createReview(CreateReviewDto createReviewDto) throws NeoAdventuraException;
+    ReviewDto CreateReview(CreateReviewDto createReviewDto) throws NeoAdventuraException;
 }

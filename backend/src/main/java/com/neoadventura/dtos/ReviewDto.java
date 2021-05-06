@@ -4,10 +4,12 @@ import com.neoadventura.entities.ReviewKey;
 import com.neoadventura.entities.Servicio;
 import com.neoadventura.entities.Usuario;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 public class ReviewDto {
 
     //private Long reviewKey_id;

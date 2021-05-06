@@ -127,4 +127,12 @@ public class Usuario {
             fetch = FetchType.LAZY
     )
     private List<Servicio> servicios = new ArrayList<>();
+
+
+    @OneToMany(
+            mappedBy = "usuario",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Review> reviews = new ArrayList<>();
 }
