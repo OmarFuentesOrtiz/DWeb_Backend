@@ -28,15 +28,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDto CreateUsuario(CreateUsuarioDto createUsuarioDto) throws NeoAdventuraException {
-
-        //System.out.println(createUsuarioDto.getRol_id());
         Rol rol = rolRepository.findById(createUsuarioDto.getRol_id())
                 .orElseThrow(() -> new NotFoundException("NOT-401-1", "ROL_IN_USER_NOT_FOUND"));
 
         Usuario usuario = new Usuario();
 
-        //System.out.println(rol.getId());
-        //System.out.println( "*************** create service: "+ createUsuarioDto.getPrice());
 
         usuario.setName(createUsuarioDto.getName()); //
         usuario.setEmail(createUsuarioDto.getEmail()); //
@@ -49,7 +45,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setBanned(false);
         usuario.setRol(rol);
 
-        //System.out.println( "*************** service: "+ usuario.getPrice());
 
         try {
             usuarioRepository.save(usuario);
@@ -61,14 +56,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDto getUsuarioById(Long id) throws NeoAdventuraException {
-        return modelMapper.map(getUsuarioEntity(id), UsuarioDto.class);
+        Usuario usuario = getUsuarioEntity(id);
+        UsuarioDto usuarioDto = modelMapper.map(getUsuarioEntity(id), UsuarioDto.class);
+        usuarioDto.setRol_id(usuario.getRol().getId());
+        return usuarioDto;
     }
 
     @Override
     public List<UsuarioDto> getUsuarios() throws NeoAdventuraException {
-        List<Usuario> serviciosEntity = usuarioRepository.findAll();
-        return serviciosEntity.stream().map(usuario -> modelMapper.map(usuario, UsuarioDto.class))
+        List<Usuario> usuariosEntity = usuarioRepository.findAll();
+        List<UsuarioDto> usuarioDtos = usuariosEntity.stream().map(usuario -> modelMapper.map(usuario, UsuarioDto.class))
                 .collect(Collectors.toList());
+        for (int i = 0; i < usuarioDtos.size(); i++) {
+            usuarioDtos.get(i).setRol_id(usuariosEntity.get(i).getRol().getId());
+        }
+        return usuarioDtos;
     }
 
     private Usuario getUsuarioEntity(Long id) throws NeoAdventuraException {

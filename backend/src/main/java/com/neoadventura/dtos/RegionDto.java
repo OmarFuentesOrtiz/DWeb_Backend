@@ -8,5 +8,5 @@ import lombok.Setter;
 public class RegionDto {
     private Long id;
     private String name;
-    private String paisId;
+    //private Long paisId;
 }

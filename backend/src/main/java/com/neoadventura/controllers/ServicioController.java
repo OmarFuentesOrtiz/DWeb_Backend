@@ -29,7 +29,7 @@ public class ServicioController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/servicios/{serviciosId}")
+    @GetMapping("/servicios/{servicioId}")
     public NeoAdventuraResponse<ServicioDto> getServicioById(@PathVariable Long servicioId)
             throws NeoAdventuraException {
         return new NeoAdventuraResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",

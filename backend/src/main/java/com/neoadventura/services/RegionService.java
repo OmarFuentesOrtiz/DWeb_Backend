@@ -1,6 +1,5 @@
 package com.neoadventura.services;
 
-import com.neoadventura.dtos.PaisDto;
 import com.neoadventura.dtos.RegionDto;
 import com.neoadventura.exceptions.NeoAdventuraException;
 

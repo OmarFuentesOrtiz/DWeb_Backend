@@ -3,6 +3,7 @@ package com.neoadventura.services.impl;
 import com.neoadventura.dtos.CreateServiceDto;
 import com.neoadventura.dtos.ModalidadDto;
 import com.neoadventura.dtos.ServicioDto;
+import com.neoadventura.dtos.UsuarioDto;
 import com.neoadventura.entities.*;
 import com.neoadventura.exceptions.InternalServerErrorException;
 import com.neoadventura.exceptions.NeoAdventuraException;
@@ -38,20 +39,19 @@ public class ServicioServiceImpl implements ServicioService {
     @Override
     public String CreateServicio(CreateServiceDto createServiceDto) throws NeoAdventuraException {
         Region region = regionRepository.findById(createServiceDto.getRegion_id())
-                .orElseThrow(() -> new NotFoundException("NOT-401-1", "RESTAURANT_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("NOT-401-1", "REGION_NOT_FOUND"));
 
         Plataforma plataforma = plataformaRepository.findById(createServiceDto.getPlataforma_id())
-                .orElseThrow(() -> new NotFoundException("NOT-401-1", "RESTAURANT_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("NOT-401-1", "PLATAFORMA_NOT_FOUND"));
 
         Usuario usuario = usuarioRepository.findById(createServiceDto.getUsuario_id())
-                .orElseThrow(() -> new NotFoundException("NOT-401-1", "RESTAURANT_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("NOT-401-1", "USUARIO_NOT_FOUND"));
 
         Modalidad modalidad = modalidadRepository.findById(createServiceDto.getModalidad_id())
-                .orElseThrow(() -> new NotFoundException("NOT-401-1", "RESTAURANT_NOT_FOUND"));
+                .orElseThrow(() -> new NotFoundException("NOT-401-1", "MODALIDA_NOT_FOUND"));
 
         Servicio servicio = new Servicio();
 
-        System.out.println( "*************** create service: "+ createServiceDto.getPrice());
 
         servicio.setName(createServiceDto.getName());
         servicio.setDescription(createServiceDto.getDescription());
@@ -63,7 +63,6 @@ public class ServicioServiceImpl implements ServicioService {
         servicio.setPlataforma(plataforma);
         servicio.setUsuario(usuario);
 
-        System.out.println( "*************** service: "+ servicio.getPrice());
 
         try {
             servicioRepository.save(servicio);
@@ -75,14 +74,27 @@ public class ServicioServiceImpl implements ServicioService {
 
     @Override
     public ServicioDto getServicioById(Long id) throws NeoAdventuraException {
-        return modelMapper.map(getServicioEntity(id), ServicioDto.class);
+        Servicio servicio =getServicioEntity(id);
+        ServicioDto servicioDto = modelMapper.map(getServicioEntity(id), ServicioDto.class);
+        servicioDto.setModalidad_id(servicio.getModalidad().getId());
+        servicioDto.setPlataforma_id(servicio.getPlataforma().getId());
+        servicioDto.setRegion_id(servicio.getRegion().getId());
+        servicioDto.setUsuario_id(servicio.getUsuario().getId());
+        return servicioDto;
     }
 
     @Override
     public List<ServicioDto> getServicios() throws NeoAdventuraException {
         List<Servicio> serviciosEntity = servicioRepository.findAll();
-        return serviciosEntity.stream().map(servicio -> modelMapper.map(servicio, ServicioDto.class))
+        List<ServicioDto> servicioDtos = serviciosEntity.stream().map(servicio -> modelMapper.map(servicio, ServicioDto.class))
                 .collect(Collectors.toList());
+        for (int i = 0; i < servicioDtos.size(); i++) {
+            servicioDtos.get(i).setModalidad_id(serviciosEntity.get(i).getModalidad().getId());
+            servicioDtos.get(i).setPlataforma_id(serviciosEntity.get(i).getPlataforma().getId());
+            servicioDtos.get(i).setRegion_id(serviciosEntity.get(i).getRegion().getId());
+            servicioDtos.get(i).setUsuario_id(serviciosEntity.get(i).getUsuario().getId());
+        }
+        return servicioDtos;
     }
 
     private Servicio getServicioEntity(Long id) throws NeoAdventuraException {

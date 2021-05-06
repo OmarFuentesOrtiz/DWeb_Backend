@@ -28,11 +28,11 @@ public class UsuarioController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/usuarios/{usuariosId}")
-    public NeoAdventuraResponse<UsuarioDto> getUsuarioById(@PathVariable Long servicioId)
+    @GetMapping("/usuarios/{usuarioId}")
+    public NeoAdventuraResponse<UsuarioDto> getUsuarioById(@PathVariable Long usuarioId)
             throws NeoAdventuraException {
         return new NeoAdventuraResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
-                usuarioService.getUsuarioById(servicioId));
+                usuarioService.getUsuarioById(usuarioId));
     }
 
     @ResponseStatus(HttpStatus.OK)

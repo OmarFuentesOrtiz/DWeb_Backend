@@ -1,11 +1,10 @@
 package com.neoadventura.services.impl;
 
-import com.neoadventura.dtos.ModalidadDto;
+import com.neoadventura.dtos.PaisDto;
 import com.neoadventura.dtos.RegionDto;
 import com.neoadventura.entities.Region;
 import com.neoadventura.exceptions.NeoAdventuraException;
 import com.neoadventura.exceptions.NotFoundException;
-import com.neoadventura.repositories.PaisRepository;
 import com.neoadventura.repositories.RegionRepository;
 import com.neoadventura.services.RegionService;
 import org.modelmapper.ModelMapper;
