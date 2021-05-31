@@ -116,7 +116,7 @@ public class Servicio {
 
     @OneToMany(
             mappedBy = "servicio",
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             fetch = FetchType.LAZY
     )
     private List<Review> reviews = new ArrayList<>();

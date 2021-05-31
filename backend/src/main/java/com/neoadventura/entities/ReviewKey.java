@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -19,5 +20,21 @@ public class ReviewKey implements Serializable {
     @Column(name= "usuario_id")
     private Long usuarioId;
 
-    // hashcode and equals implementation
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        ReviewKey that = (ReviewKey) o;
+        return Objects.equals(servicioId, that.servicioId) &&
+                Objects.equals(usuarioId, that.usuarioId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(servicioId, usuarioId);
+    }
+
 }

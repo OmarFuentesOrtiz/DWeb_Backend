@@ -131,7 +131,7 @@ public class Usuario {
 
     @OneToMany(
             mappedBy = "usuario",
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             fetch = FetchType.LAZY
     )
     private List<Review> reviews = new ArrayList<>();
