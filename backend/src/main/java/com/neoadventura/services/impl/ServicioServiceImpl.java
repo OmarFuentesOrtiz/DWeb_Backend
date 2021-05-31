@@ -1,7 +1,6 @@
 package com.neoadventura.services.impl;
 
-import com.neoadventura.dtos.CreateServiceDto;
-import com.neoadventura.dtos.ModalidadDto;
+import com.neoadventura.dtos.CreateServicioDto;
 import com.neoadventura.dtos.ServicioDto;
 import com.neoadventura.dtos.UsuarioDto;
 import com.neoadventura.entities.*;
@@ -37,27 +36,27 @@ public class ServicioServiceImpl implements ServicioService {
     private ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public String CreateServicio(CreateServiceDto createServiceDto) throws NeoAdventuraException {
-        Region region = regionRepository.findById(createServiceDto.getRegion_id())
+    public ServicioDto CreateServicio(CreateServicioDto createServicioDto) throws NeoAdventuraException {
+        Region region = regionRepository.findById(createServicioDto.getRegion_id())
                 .orElseThrow(() -> new NotFoundException("NOT-401-1", "REGION_NOT_FOUND"));
 
-        Plataforma plataforma = plataformaRepository.findById(createServiceDto.getPlataforma_id())
+        Plataforma plataforma = plataformaRepository.findById(createServicioDto.getPlataforma_id())
                 .orElseThrow(() -> new NotFoundException("NOT-401-1", "PLATAFORMA_NOT_FOUND"));
 
-        Usuario usuario = usuarioRepository.findById(createServiceDto.getUsuario_id())
+        Usuario usuario = usuarioRepository.findById(createServicioDto.getUsuario_id())
                 .orElseThrow(() -> new NotFoundException("NOT-401-1", "USUARIO_NOT_FOUND"));
 
-        Modalidad modalidad = modalidadRepository.findById(createServiceDto.getModalidad_id())
+        Modalidad modalidad = modalidadRepository.findById(createServicioDto.getModalidad_id())
                 .orElseThrow(() -> new NotFoundException("NOT-401-1", "MODALIDA_NOT_FOUND"));
 
         Servicio servicio = new Servicio();
 
 
-        servicio.setName(createServiceDto.getName());
-        servicio.setDescription(createServiceDto.getDescription());
-        servicio.setInit_valid_date(createServiceDto.getInit_valid_date());
-        servicio.setEnd_valid_date(createServiceDto.getEnd_valid_date());
-        servicio.setPrice(createServiceDto.getPrice());
+        servicio.setName(createServicioDto.getName());
+        servicio.setDescription(createServicioDto.getDescription());
+        servicio.setInit_valid_date(createServicioDto.getInit_valid_date());
+        servicio.setEnd_valid_date(createServicioDto.getEnd_valid_date());
+        servicio.setPrice(createServicioDto.getPrice());
         servicio.setModalidad(modalidad);
         servicio.setRegion(region);
         servicio.setPlataforma(plataforma);
@@ -69,7 +68,7 @@ public class ServicioServiceImpl implements ServicioService {
         } catch (Exception ex) {
             throw new InternalServerErrorException("INTERNAL_ERROR", "INTERNAL_ERROR");
         }
-        return servicio.getName();
+        return modelMapper.map(getServicioEntity(servicio.getId()), ServicioDto.class);
     }
 
     @Override

@@ -1,11 +1,9 @@
 package com.neoadventura.controllers;
 
-import com.neoadventura.dtos.CreateServiceDto;
-import com.neoadventura.dtos.RegionDto;
+import com.neoadventura.dtos.CreateServicioDto;
 import com.neoadventura.dtos.ServicioDto;
 import com.neoadventura.exceptions.NeoAdventuraException;
 import com.neoadventura.responses.NeoAdventuraResponse;
-import com.neoadventura.services.RegionService;
 import com.neoadventura.services.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +20,10 @@ public class ServicioController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/servicios")
-    public NeoAdventuraResponse<String> createServicio(@RequestBody CreateServiceDto createServiceDto)
+    public NeoAdventuraResponse<ServicioDto> createServicio(@RequestBody CreateServicioDto createServicioDto)
             throws NeoAdventuraException{
         return new NeoAdventuraResponse<>("Success", String.valueOf(HttpStatus.OK),
-                "OK", servicioService.CreateServicio(createServiceDto));
+                "OK", servicioService.CreateServicio(createServicioDto));
     }
 
     @ResponseStatus(HttpStatus.OK)

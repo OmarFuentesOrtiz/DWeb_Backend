@@ -45,11 +45,9 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     @Override
     public ReviewDto CreateReview(CreateReviewDto createReviewDto) throws NeoAdventuraException {
-        Servicio servicio = servicioRepository.findById(createReviewDto.getServicio_id())
-                .orElseThrow(() -> new NotFoundException("NOT-401-1", "SERVICIO_NOT_FOUND"));
+        Servicio servicio = getServicioEntity(createReviewDto.getServicio_id());
 
-        Usuario usuario = usuarioRepository.findById(createReviewDto.getUsuario_id())
-                .orElseThrow(() -> new NotFoundException("NOT-401-1", "USUARIO_NOT_FOUND"));
+        Usuario usuario = getUsuarioEntity(createReviewDto.getUsuario_id());
 
 
         Review review=new Review(
@@ -66,8 +64,8 @@ public class ReviewServiceImpl implements ReviewService {
 
         try {
             review=reviewRepository.save(review);
-        }catch (Exception ex){
-            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR","INTERNAL_SERVER_ERROR");
+        }catch (Exception ex) {
+            throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "INTERNAL_SERVER_ERROR");
         }
         return modelmapper.map(getReviewEntity(review.getUsuario().getId(), review.getServicio().getId()),ReviewDto.class);
     }
