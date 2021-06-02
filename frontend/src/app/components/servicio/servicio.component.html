@@ -1,10 +1,15 @@
-<h2>Servicio 1</h2>
-<div><span>Id: </span>{{servicio1.id}}</div>
-<div><span>Modalidad: </span>{{servicio1.modalidad}}</div>
-<div><span>Region: </span>{{servicio1.region}}</div>
-<div><span>Plataforma: </span>{{servicio1.plataforma}}</div>
-<div><span>Usuario: </span>{{servicio1.usuario}}</div>
-<div><span>Name: </span>{{servicio1.name}}</div>
-<div><span>Description: </span>{{servicio1.description}}</div>
-<div><span>Fecha de inicio: </span>{{servicio1.init_date}}</div>
-<div><span>Fecha de fin:</span>{{servicio1.end_date}}</div>
+<h2>SERVICIOS</h2>
+<ul class="servicios">
+    <li *ngFor = "let servicio of servicios">
+        <div><span class = "target">Id: </span>{{servicio.id}}</div>
+        <div><span class = "target">Modalidad: </span>{{servicio.modalidad}}</div>
+        <div><span class = "target">Region: </span>{{servicio.region}}</div>
+        <div><span class = "target">Plataforma: </span>{{servicio.plataforma}}</div>
+        <div><span class = "target">Usuario: </span>{{servicio.usuario}}</div>
+        <div><span class = "target">Name: </span>{{servicio.name}}</div>
+        <div><span class = "target">Description: </span>{{servicio.description}}</div>
+        <div><span class = "target">Fecha de inicio: </span>{{servicio.init_date}}</div>
+        <div><span class = "target">Fecha de fin:</span>{{servicio.end_date}}</div>
+        <hr>
+    </li>
+</ul>
