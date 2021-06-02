@@ -114,10 +114,20 @@ public class Servicio {
     )
     private Usuario usuario;
 
+
     @OneToMany(
             mappedBy = "servicio",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             fetch = FetchType.LAZY
     )
     private List<Review> reviews = new ArrayList<>();
+
+
+    @OneToMany(
+            mappedBy = "pago",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.LAZY
+    )
+    private List<PagoServicio> pagoServicios = new ArrayList<>();
+
 }

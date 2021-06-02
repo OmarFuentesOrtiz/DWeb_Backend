@@ -128,6 +128,12 @@ public class Usuario {
     )
     private List<Servicio> servicios = new ArrayList<>();
 
+    @OneToMany(
+            mappedBy = "usuario",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Pago> pagos = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "usuario",
@@ -135,6 +141,7 @@ public class Usuario {
             fetch = FetchType.LAZY
     )
     private List<Review> reviews = new ArrayList<>();
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

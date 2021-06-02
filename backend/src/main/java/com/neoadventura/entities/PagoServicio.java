@@ -14,21 +14,21 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review {
+public class PagoServicio {
     @EmbeddedId
-    private ReviewKey id;
+    private PagoServicioKey id;
 
     @ManyToOne
-    @MapsId("usuarioId")
+    @MapsId("pagoId")
     @JoinColumn(
-            name="usuario_id",
+            name="pago_id",
             nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "usuario_review_fk"
+                    name = "pago_pagoServicio_fk"
             )
     )
-    private Usuario usuario;
+    private Pago pago;
 
     @ManyToOne
     @MapsId("servicioId")
@@ -37,24 +37,10 @@ public class Review {
             nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "servicio_review_fk"
+                    name = "servicio_pagoServicio_fk"
             )
     )
     private Servicio servicio;
-
-    @Column(
-            name="score",
-            nullable = false,
-            columnDefinition = "SMALLINT"
-    )
-    private Integer score;
-
-    @Column(
-            name="description",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String description;
 
     @Column(
             name="reported",
@@ -63,6 +49,13 @@ public class Review {
     )
     private Boolean reported;
 
+    @Column(
+            name="description",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String description;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,15 +63,14 @@ public class Review {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        Review that = (Review) o;
-        return Objects.equals(servicio, that.servicio) &&
-                Objects.equals(usuario, that.usuario);
+        PagoServicio that = (PagoServicio) o;
+        return Objects.equals(pago, that.pago) &&
+                Objects.equals(servicio, that.servicio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(servicio, usuario);
+        return Objects.hash(pago, servicio);
     }
 
 }
-
