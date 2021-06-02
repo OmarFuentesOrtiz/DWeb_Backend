@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(
-        name="reviews"
+        name="pago_servicios"
 )
 @Data
 @AllArgsConstructor
