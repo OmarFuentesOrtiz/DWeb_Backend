@@ -135,4 +135,18 @@ public class Usuario {
             fetch = FetchType.LAZY
     )
     private List<Review> reviews = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="usuario_idioma",
+            joinColumns = @JoinColumn(name="idioma_id"),
+            inverseJoinColumns = @JoinColumn(name="usuario_id")
+    )
+    private List<Idioma> idiomas;
+
+    public void addIdioma(Idioma idioma){
+        if(idiomas.contains(idioma) == false) {
+            this.idiomas.add(idioma);
+        }
+    }
 }

@@ -10,4 +10,5 @@ public interface UsuarioService {
     UsuarioDto CreateUsuario(CreateUsuarioDto usuarioDto) throws NeoAdventuraException;
     UsuarioDto getUsuarioById(Long id) throws NeoAdventuraException;
     List<UsuarioDto> getUsuarios() throws NeoAdventuraException;
+    UsuarioDto addIdioma(Long usuario_id, Long idioma_id) throws NeoAdventuraException;
 }

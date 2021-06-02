@@ -42,4 +42,12 @@ public class UsuarioController {
         return new NeoAdventuraResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
                 usuarioService.getUsuarios());
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/usuarios/{usuario_id}/idioma/{idioma_id}")
+    public NeoAdventuraResponse<UsuarioDto> insertIdiomaUsuario(@PathVariable Long usuario_id, @PathVariable Long idioma_id)
+            throws NeoAdventuraException{
+        return new NeoAdventuraResponse<>("Success", String.valueOf(HttpStatus.OK), "OK",
+                usuarioService.addIdioma(usuario_id, idioma_id));
+    }
 }

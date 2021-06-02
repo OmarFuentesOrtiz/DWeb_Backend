@@ -24,6 +24,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private RolRepository rolRepository;
 
+    @Autowired
+    private IdiomaRepository idiomaRepository;
+
     private ModelMapper modelMapper = new ModelMapper();
 
     @Override
@@ -71,6 +74,20 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioDtos.get(i).setRol_id(usuariosEntity.get(i).getRol().getId());
         }
         return usuarioDtos;
+    }
+
+    @Override
+    public UsuarioDto addIdioma(Long usuario_id, Long idioma_id) throws NeoAdventuraException {
+        Idioma idioma = idiomaRepository.findById(idioma_id)
+                .orElseThrow(() -> new NotFoundException("NOT-401-1", "IDIOMA_NOT_FOUND"));
+
+        Usuario usuario = usuarioRepository.findById(usuario_id)
+                .orElseThrow(() -> new NotFoundException("NOT-401-1", "USUARIO_NOT_FOUND"));
+
+        usuario.addIdioma(idioma);
+
+        Usuario saveUsuario = this.usuarioRepository.save(usuario);
+        return modelMapper.map(saveUsuario, UsuarioDto.class);
     }
 
     private Usuario getUsuarioEntity(Long id) throws NeoAdventuraException {
