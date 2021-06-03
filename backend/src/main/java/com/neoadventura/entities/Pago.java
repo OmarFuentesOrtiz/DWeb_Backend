@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -31,6 +33,20 @@ public class Pago {
             updatable = false
     )
     private Long id;
+
+    @Column(
+            name="pay_date",
+            nullable = false,
+            columnDefinition = "DATE"
+    )
+    private Date pay_date;
+
+    @Column(
+            name="mount",
+            nullable = false,
+            columnDefinition = "NUMERIC"
+    )
+    private BigDecimal mount;
 
 
     @ManyToOne
